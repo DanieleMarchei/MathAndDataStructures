@@ -62,9 +62,12 @@ namespace MathAndDataStructures
 
         public Matrix Plus(Matrix mat)
         {
-            //
+            
             if (mat.Rows != Rows || mat.Columns != Columns)
+            {
                 throw new ArgumentException($"The number of rows and columns of both matrices must be equals");
+            }
+
             Matrix result = new Matrix(Rows, Columns);
             for (int i = 0; i < Columns; i++)
             {
