@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace MathAndDataStructures.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class MatrixTest
     {
         [TestMethod]
         public void TestMatrixAddOk()

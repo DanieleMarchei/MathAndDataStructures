@@ -10,9 +10,22 @@ namespace MathAndDataStructures
     {
         static void Main(string[] args)
         {
-            int[,] arr = new int[2, 4];
-            int[,] arr2 = new int[2, 4];
-            Console.WriteLine(arr.Equals(arr2)); 
+            UndirectedGraph ug = new UndirectedGraph();
+            ug.AddNode(0.0);
+            ug.AddNode(1.0);
+            ug.AddNode(2.0);
+            ug.AddNode(3.0);
+            ug.AddNode(4.0);
+            ug.AddNode(5.0);
+            ug.AddNode(6.0);
+            ug.AddNode(7.0);
+            ug.AddEdge(3.0, 1.0);
+            ug.AddEdge(0.0, 4.0);
+            ug.AddEdge(4.0, 5.0);
+            ug.AddEdge(2.0, 1.0);
+            ug.AddEdge(6.0, 7.0);
+            ug.AddEdge(1.0, 7.0);
+            Console.WriteLine(ug.GetMatrix());
             Console.Read();
         }
     }

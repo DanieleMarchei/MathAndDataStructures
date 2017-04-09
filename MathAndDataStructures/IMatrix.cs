@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace MathAndDataStructures
 {
-    interface IMatrix
+    public interface IMatrix
     {
         //params allows n-dimentional matrices
-        double Get(params int[] index);
+        double Get(params uint[] index);
 
-        void Set(double value, params int[] index);
+        void Set(double value, params uint[] index);
 
         Matrix Plus(Matrix mat);
 
@@ -19,5 +19,10 @@ namespace MathAndDataStructures
 
         Matrix Times(Matrix mat);
 
+        uint Rank { get; }
+
+        uint Dimension { get; }
+
+        uint[] Dimensions { get; }
     }
 }

@@ -8,12 +8,24 @@ namespace MathAndDataStructures
 {
     public class Matrix : IMatrix
     {
-        private readonly int Rows;
-        private readonly int Columns;
+        private readonly uint Rows;
+        private readonly uint Columns;
 
         private double[,] ArrMatrix;
 
-        public Matrix(int Rows, int Columns)
+        public uint Dimension => (uint) ArrMatrix.Rank;
+        public uint Rank { get { throw new NotImplementedException(""); } }
+
+        public uint[] Dimensions
+        {
+            get
+            {
+                uint[] res = { Rows, Columns };
+                return res;
+            }
+        }
+
+        public Matrix(uint Rows, uint Columns)
         {
             this.Rows = Rows;
             this.Columns = Columns;
@@ -22,8 +34,8 @@ namespace MathAndDataStructures
 
         public Matrix(double[,] arr)
         {
-            this.Rows = arr.GetLength(0);
-            this.Columns = arr.GetLength(1);
+            this.Rows = (uint)arr.GetLength(0);
+            this.Columns = (uint)arr.GetLength(1);
             ArrMatrix = new double[Rows, Columns];
             for (int i = 0; i < Columns; i++)
             {
@@ -34,27 +46,27 @@ namespace MathAndDataStructures
             }
         }
 
-        public double Get(params int[] index)
+        public double Get(params uint[] index)
         {
             if (index.Length != 2)
             {
                 throw new ArgumentException("Only 2 numbers for the index must be entered");
             }
-            int r = index[0];
-            int c = index[1];
+            uint r = (uint)index[0];
+            uint c = (uint)index[1];
             if (r > Rows || r < 0 || c > Columns || c < 0)
                 throw new ArgumentException($"Row must be between 0 and {Rows}, Column must be between 0 and {Columns}");
             return ArrMatrix[r, c];
         }
 
-        public void Set(double value, params int[] index)
+        public void Set(double value, params uint[] index)
         {
             if (index.Length != 2)
             {
                 throw new ArgumentException("Only 2 numbers for the index must be entered");
             }
-            int r = index[0];
-            int c = index[1];
+            uint r = (uint)index[0];
+            uint c = (uint)index[1];
             if (r > Rows || r < 0 || c > Columns || c < 0)
                 throw new ArgumentException($"Row must be between 0 and {Rows}, Column must be between 0 and {Columns}");
             ArrMatrix[r, c] = value;
@@ -69,9 +81,9 @@ namespace MathAndDataStructures
             }
 
             Matrix result = new Matrix(Rows, Columns);
-            for (int i = 0; i < Columns; i++)
+            for (uint i = 0; i < Columns; i++)
             {
-                for (int j = 0; j < Rows; j++)
+                for (uint j = 0; j < Rows; j++)
                 {
                     result.Set(this.Get(j, i) + mat.Get(j, i), j, i);
                 }
@@ -84,9 +96,9 @@ namespace MathAndDataStructures
             if (mat.Rows != Rows || mat.Columns != Columns)
                 throw new ArgumentException($"The number of rows and columns of both matrices must be equals");
             Matrix result = new Matrix(Rows, Columns);
-            for (int i = 0; i < Columns; i++)
+            for (uint i = 0; i < Columns; i++)
             {
-                for (int j = 0; j < Rows; j++)
+                for (uint j = 0; j < Rows; j++)
                 {
                     result.Set(this.Get(j, i) - mat.Get(j, i), j, i);
                 }
@@ -100,12 +112,12 @@ namespace MathAndDataStructures
                 throw new ArgumentException($"The number of rows must be equal to the number of columns");
             Matrix result = new Matrix(Rows, Columns);
             double tmp = 0;
-            for (int i = 0; i < Columns; i++)
+            for (uint i = 0; i < Columns; i++)
             {
-                for (int j = 0; j < Rows; j++)
+                for (uint j = 0; j < Rows; j++)
                 {
                     tmp = 0;
-                    for (int k = 0; k < Columns; k++)
+                    for (uint k = 0; k < Columns; k++)
                     {
                         tmp += this.Get(j, k) * mat.Get(k, j);
                     }
@@ -127,9 +139,9 @@ namespace MathAndDataStructures
             Matrix mat = (Matrix)obj;
             bool result = true;
 
-            for (int i = 0; i < Columns && result; i++)
+            for (uint i = 0; i < Columns && result; i++)
             {
-                for (int j = 0; j < Rows && result; j++)
+                for (uint j = 0; j < Rows && result; j++)
                 {
                     result &= this.Get(j, i) == mat.Get(j, i);
                 }
@@ -141,7 +153,6 @@ namespace MathAndDataStructures
         public override int GetHashCode()
         {
             // TODO: write your implementation of GetHashCode() here
-            throw new NotImplementedException();
             return base.GetHashCode();
         }
 
