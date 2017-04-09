@@ -52,6 +52,7 @@ namespace MathAndDataStructures
         {
             if (!(from is double) || !(to is double)) throw new ArgumentException("Only double accepted");
             if (!Nodes.ContainsKey(from) || !Nodes.ContainsKey(to)) throw new ArgumentException("Node not find");
+            if ((double)from == (double)to) throw new ArgumentException("No loop");
 
             IEdge e = new DefaultUndirectedEdge();
             e.From = from;
@@ -73,7 +74,18 @@ namespace MathAndDataStructures
 
         public IEdge GetEdge(object from, object to)
         {
-            throw new NotImplementedException();
+            if (!(from is double) || !(to is double)) throw new ArgumentException("Only double accepted");
+            if (!Nodes.ContainsKey(from) || !Nodes.ContainsKey(to)) throw new ArgumentException("Node not find");
+            IEdge ed;
+            try
+            {
+                ed = Edges.First((IEdge e) => (double)e.From == (double)from && (double)e.To == (double)to || (double)e.From == (double)to && (double)e.To == (double)from);
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+            return ed;
         }
 
         public ISet<IEdge> GetIngoing(object node)
