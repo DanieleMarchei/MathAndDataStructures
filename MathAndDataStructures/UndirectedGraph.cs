@@ -88,7 +88,7 @@ namespace MathAndDataStructures
 
         public bool IsDirected()
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public bool IsReachable(object node)
@@ -98,7 +98,10 @@ namespace MathAndDataStructures
 
         public void SetEdgeWeight(IEdge edge, double weight)
         {
-            throw new NotImplementedException();
+            if (Edges.Contains(edge))
+            {
+                edge.Weight = weight;
+            }
         }
 
         public void SetNode(object oldNode, object newNode)
