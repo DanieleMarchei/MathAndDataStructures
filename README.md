@@ -3,7 +3,7 @@
 ## Introduction
 
 This is a C# library for advanced math and data structures.<br>
-It starts as a little project and, how knows, maybe one day will be a professional thing. :)
+It starts as a little project and, who knows, maybe one day will be a professional thing. :)
 <br>
 
 ## Status
