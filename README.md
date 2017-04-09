@@ -1,4 +1,4 @@
-﻿# Math and Data Structures
+# Math and Data Structures
 
 ## Introduction
 
