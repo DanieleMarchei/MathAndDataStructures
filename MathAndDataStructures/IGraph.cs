@@ -21,9 +21,9 @@ namespace MathAndDataStructures
 
         IEdge GetEdge(object from, object to);
 
-        void SetNode(object oldNode, object newNode);
+        void RemoveNode(object node);
 
-        object GetNode(ulong Id);
+        void RemoveEdge(object from, object to);
 
         ISet<IGraph> GetConnectedComponents();
 
@@ -35,9 +35,7 @@ namespace MathAndDataStructures
 
         bool IsDirected();
 
-        
-
-        DrawnGraph Draw();
+        DrawableGraph Draw();
 
     }
 }

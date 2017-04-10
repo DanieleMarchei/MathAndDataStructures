@@ -25,9 +25,10 @@ namespace MathAndDataStructures
             ug.AddEdge(2.0, 1.0);
             ug.AddEdge(6.0, 7.0);
             ug.AddEdge(1.0, 7.0);
+            Console.WriteLine(ug.GetMatrix());
+            ug.RemoveEdge(0.0,4.0);
+            Console.WriteLine(ug.GetMatrix());
 
-            IEdge f = ug.GetEdge(1.0, 3.0);
-            Console.WriteLine(f == e);
             Console.Read();
         }
     }

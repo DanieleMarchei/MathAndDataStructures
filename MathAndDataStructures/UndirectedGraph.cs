@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MathAndDataStructures
 {
@@ -62,7 +60,7 @@ namespace MathAndDataStructures
 
         }
 
-        public DrawnGraph Draw()
+        public DrawableGraph Draw()
         {
             throw new NotImplementedException();
         }
@@ -90,12 +88,29 @@ namespace MathAndDataStructures
 
         public ISet<IEdge> GetIngoing(object node)
         {
-            throw new NotImplementedException();
+            if (Nodes.ContainsKey(node))
+            {
+                try
+                {
+                    IEnumerable<IEdge> en = Edges.Where((IEdge e) => (double)e.From == (double)node || (double)e.To == (double)node);
+                    ISet<IEdge> result = new HashSet<IEdge>(en);
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+                
+            }
+            else
+            {
+                throw new ArgumentException("Node not found");
+            }
         }
 
         public ISet<IEdge> GetOutgoing(object node)
         {
-            throw new NotImplementedException();
+            return GetIngoing(node);
         }
 
         public bool IsDirected()
@@ -114,16 +129,50 @@ namespace MathAndDataStructures
             {
                 edge.Weight = weight;
             }
+            else
+            {
+                throw new ArgumentException("Edge not found");
+            }
         }
 
-        public void SetNode(object oldNode, object newNode)
+        public void RemoveNode(object node)
         {
-            throw new NotImplementedException();
+            if (Nodes.ContainsKey(node))
+            {
+                List<IEdge> en = null;
+                try
+                {
+                    en = Edges.Where((IEdge e) => (double)e.From == (double)node || (double)e.To == (double)node).ToList();
+                }
+                catch(Exception ex)
+                {
+                    return;
+                }
+                 
+                foreach(IEdge e in en)
+                {
+                    Edges.Remove(e);
+                }
+                Nodes.Remove(node);
+                uint i = 0;
+                List<KeyValuePair<object,uint>> l = Nodes.ToList();
+                foreach(KeyValuePair<object,uint> o in l)
+                {
+                    Nodes[o.Key] = i;
+                    i++;
+                }
+                Id = (uint)Nodes.Count;
+            }
+            else
+            {
+                throw new ArgumentException("Node not found");
+            }
         }
 
-        public object GetNode(ulong Id)
+        public void RemoveEdge(object from, object to)
         {
-            throw new NotImplementedException();
+            IEdge e = GetEdge(from, to);
+            Edges.Remove(e);
         }
     }
 }
